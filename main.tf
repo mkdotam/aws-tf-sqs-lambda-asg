@@ -84,5 +84,5 @@ module "lambda" {
 
 ############
 # This command can be used to publish messages to SQS queue from EC2 machine located in private subnet, and --endpoint-url speeds up the process significantly:
-# aws sqs send-message --queue-url https://sqs.us-west-2.amazonaws.com/848087466701/ec2-scale-by-trigger-dev-queue --endpoint-url https://sqs.us-west-2.amazonaws.com/ --message-body 1 
+# aws sqs send-message --queue-url <SQS HTTP Url> --endpoint-url https://sqs.us-west-2.amazonaws.com/ --message-body 0
 ############
