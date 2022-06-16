@@ -36,10 +36,6 @@ module "vpc" {
   }
 }
 
-output "vpc_private_subnets" {
-  value = module.vpc.private_subnets
-}
-
 module "asg" {
   source = "./asg/"
 
@@ -57,11 +53,11 @@ module "asg" {
 }
 
 resource "aws_sqs_queue" "this" {
-  name                      = "${local.project}-${local.env}-queue"
-  delay_seconds             = 0
-  max_message_size          = 2048
-  message_retention_seconds = 86400
-  receive_wait_time_seconds = 10
+  name                       = "${local.project}-${local.env}-queue"
+  delay_seconds              = 0
+  max_message_size           = 2048
+  message_retention_seconds  = 86400
+  receive_wait_time_seconds  = 10
   visibility_timeout_seconds = 900
 
   tags = {
@@ -78,9 +74,15 @@ module "lambda" {
   env     = local.env
 
   trigger_queue_arn = aws_sqs_queue.this.arn
+  asg_name          = module.asg.asg_name
 
   tags = {
     Project     = local.project
     Environment = local.env
   }
 }
+
+############
+# This command can be used to publish messages to SQS queue from EC2 machine located in private subnet, and --endpoint-url speeds up the process significantly:
+# aws sqs send-message --queue-url https://sqs.us-west-2.amazonaws.com/848087466701/ec2-scale-by-trigger-dev-queue --endpoint-url https://sqs.us-west-2.amazonaws.com/ --message-body 1 
+############

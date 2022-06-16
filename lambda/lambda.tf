@@ -41,7 +41,8 @@ resource "aws_lambda_function" "_" {
 
   environment {
     variables = {
-      LOG_LEVEL = "INFO"
+      LOG_LEVEL = "INFO",
+      ASG_NAME  = var.asg_name
     }
   }
 

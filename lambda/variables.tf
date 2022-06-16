@@ -27,3 +27,7 @@ variable "subnets" {
   type    = list(string)
   default = []
 }
+
+variable "asg_name" {
+  type = string
+}

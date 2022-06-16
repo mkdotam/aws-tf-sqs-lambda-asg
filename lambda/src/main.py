@@ -1,8 +1,8 @@
 import boto3
-import json
+import os
 
 asg = boto3.client('autoscaling', region_name='us-west-2')
-asg_name = "ec2-scale-by-trigger-dev-test"
+asg_name = os.environ.get('ASG_NAME')
 
 
 def handler(event, context):
