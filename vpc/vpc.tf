@@ -83,3 +83,17 @@ resource "aws_vpc_endpoint" "ssm" {
     aws_security_group.vpc_endpoint_sg
   ]
 }
+
+resource "aws_vpc_endpoint" "sqs" {
+  vpc_id              = module.vpc.vpc_id
+  service_name        = "com.amazonaws.${var.region}.sqs"
+  vpc_endpoint_type   = "Interface"
+  private_dns_enabled = true
+
+  security_group_ids = [aws_security_group.vpc_endpoint_sg.id]
+  subnet_ids         = module.vpc.private_subnets
+
+  depends_on = [
+    aws_security_group.vpc_endpoint_sg
+  ]
+}
