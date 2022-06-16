@@ -40,6 +40,10 @@ resource "aws_vpc_endpoint" "ec2messages" {
   depends_on = [
     aws_security_group.vpc_endpoint_sg
   ]
+
+  tags = {
+    Name = "EC2 Messages Endpoint"
+  }
 }
 
 resource "aws_vpc_endpoint" "ssmmessages" {
@@ -54,6 +58,10 @@ resource "aws_vpc_endpoint" "ssmmessages" {
   depends_on = [
     aws_security_group.vpc_endpoint_sg
   ]
+
+  tags = {
+    Name = "SSM Messages Endpoint"
+  }
 }
 
 resource "aws_vpc_endpoint" "ssm" {
@@ -68,6 +76,10 @@ resource "aws_vpc_endpoint" "ssm" {
   depends_on = [
     aws_security_group.vpc_endpoint_sg
   ]
+
+  tags = {
+    Name = "SSM Endpoint"
+  }
 }
 
 resource "aws_vpc_endpoint" "sqs" {
@@ -82,4 +94,7 @@ resource "aws_vpc_endpoint" "sqs" {
   depends_on = [
     aws_security_group.vpc_endpoint_sg
   ]
+  tags = {
+    Name = "SQS Endpoint"
+  }
 }
