@@ -13,13 +13,13 @@ data "aws_iam_policy_document" "lambda_policy_document" {
 }
 
 resource "aws_iam_role" "lambda_role" {
-  name               = "fortune-lambda-execution-role"
-  description        = "Role that is assigned fortune Lambda functions."
+  name               = "lambda-execution-role"
+  description        = "Role that is assigned to the Lambda functions."
   assume_role_policy = data.aws_iam_policy_document.lambda_policy_document.json
 }
 
 resource "aws_iam_policy" "lambda_policy" {
-  name = "fortune-lambda-execution-policy"
+  name = "lambda-execution-policy"
 
   policy = <<POLICY
 {
